@@ -2,21 +2,37 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const CartContext = createContext();
 
+
+
+
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
+    const [isInitialized, setIsInitialized] = useState(false);
 
+    const clearCart = () => {
+        setCartItems([]);
+        localStorage.removeItem("cartItems");
+    };
+    
     // Load cart from localStorage
     useEffect(() => {
         const savedCart = localStorage.getItem("cartItems");
         if (savedCart) {
-            setCartItems(JSON.parse(savedCart));
+            try {
+                setCartItems(JSON.parse(savedCart));
+            } catch (e) {
+                localStorage.removeItem("cartItems");
+            }
         }
+        setIsInitialized(true);
     }, []);
 
-    // Save cart to localStorage
+    // Save cart to localStorage only after initial load
     useEffect(() => {
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    }, [cartItems]);
+        if (isInitialized) {
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        }
+    }, [cartItems, isInitialized]);
 
     const addToCart = (product) => {
         setCartItems(prev => {
@@ -44,7 +60,7 @@ export const CartProvider = ({ children }) => {
     };
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity }}>
+        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, clearCart }}>
             {children}
         </CartContext.Provider>
     );

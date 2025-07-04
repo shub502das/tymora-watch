@@ -32,6 +32,7 @@ const Bannerslider = () => {
             bannerbg: "/images/banner_bg3.jpg",
             bannerwatch: "/images/tissot_watch_women.png",
             bannerheading: "Classic Watches,<br> Eternal Style.",
+            
             bannerdescription: "Featuring sleek dials and premium materials, each timepiece is a tribute to enduring style.",
         },
     ];

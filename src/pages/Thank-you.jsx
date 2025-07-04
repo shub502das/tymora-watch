@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useCart } from "../context/CartContext";
 
 const Thankyoupage = () => {
     const [fullName, setFullName] = useState("");
     const [orderId, setOrderId] = useState("");
+    const { clearCart } = useCart();
 
     useEffect(() => {
         const saved = localStorage.getItem("checkoutData");
@@ -15,6 +17,8 @@ const Thankyoupage = () => {
             
             localStorage.removeItem("checkoutData");
             localStorage.removeItem("orderId");
+            
+            clearCart();
         }
     }, []);
 

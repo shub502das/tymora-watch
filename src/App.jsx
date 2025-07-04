@@ -28,7 +28,7 @@ function Mainlayout() {
             <Route path="/cart" element={<Cartpage />} />
             <Route path="/checkout" element={<Checkoutpage />} />
             <Route path="/thank-you" element={<Thankyoupage />} />
-          </Routes>
+          </Routes>1
       {!shouldHideLayout && <MainFooter />}
     </>
   );

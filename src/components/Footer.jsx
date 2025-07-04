@@ -100,7 +100,7 @@ const MainFooter = () => {
         </div>
         <div className="footer_btm text-center bg_blue text-white py-3">
             <div className="container">
-                <p className="m-0">Copyright <script>document.write(new Date().getFullYear())</script> Tymora Watches. All Rights Reserved</p>
+                <p className="m-0">Copyright {(new Date().getFullYear())} Tymora Watches. All Rights Reserved</p>
             </div>
         </div>
     </footer>
